@@ -30,12 +30,24 @@
     <ClInclude Include="Assignment3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Crossing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Assignment3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,6 +61,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assignment3.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="carbmp.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

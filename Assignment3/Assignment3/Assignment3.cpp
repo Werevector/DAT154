@@ -139,7 +139,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
-                break;				
+                break;
+				
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
@@ -151,26 +152,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			HDC hdc = BeginPaint(hWnd, &ps);
 			HBRUSH hBrush;
 			HGDIOBJ hOrg;
-			// Select red brush
-			hBrush = CreateSolidBrush(RGB(255, 0, 0));
-			hOrg = SelectObject(hdc, hBrush);
-			// Red circle
-			Ellipse(hdc, 100+colorG, 100+colorG, 200+colorG, 200+colorG);
-			// Reset original brush
+
+
+
 			SelectObject(hdc, hOrg);
 			DeleteObject(hBrush);
-			hBrush = CreateSolidBrush(RGB(255, 255, 0));
-			hOrg = SelectObject(hdc, hBrush);
-			Ellipse(hdc, 200, 200, 300, 300);
-			SelectObject(hdc, hOrg);
-			DeleteObject(hBrush);
-			MoveToEx(hdc, 300, 300, 0);
-			//LineTo(hdc, 400, 400);
+
 			EndPaint(hWnd, &ps);
-			colorG++;
         }
         break;
 	case WM_TIMER:
+		colorG++;
 		InvalidateRect(mainWnd, NULL, TRUE);
 		UpdateWindow(mainWnd);
 		break;

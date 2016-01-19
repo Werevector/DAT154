@@ -146,12 +146,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assignment3.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="Crossing.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assignment3.cpp" />
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="Crossing.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -164,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assignment3.ico" />
+    <Image Include="carbmp.bmp" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
