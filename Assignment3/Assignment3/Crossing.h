@@ -1,4 +1,5 @@
 #pragma once
+#include "Resource.h"
 #include <vector>
 #include "Car.h"
 #include "TrafficLight.h"
@@ -11,7 +12,7 @@ public:
 	Crossing();
 	~Crossing();
 
-	void init(rectangle win);
+	void init(HINSTANCE hinst, rectangle win);
 	void draw(HDC drawcanvas);
 	void update();
 	void tick();

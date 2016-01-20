@@ -58,6 +58,7 @@ void TrafficLight::draw(HDC drawcanvas)
 	DeleteObject(gbrush);
 	DeleteObject(ybrush);
 	DeleteObject(bbrush);
+	DeleteObject(grbrush);
 }
 
 void TrafficLight::update()

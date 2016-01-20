@@ -5,13 +5,13 @@
 class Car
 {
 public:
-	Car(int x, int y);
+	Car(int x, int y, Direction dir);
 	~Car();
 
 	void draw(HDC drawcanvas);
 	void update();
 
-	bool loadBitMap(HINSTANCE hInst, HDC originDC, int IDB, int w, int h);
+	bool loadBitMap(HINSTANCE hInst, int IDB, int w, int h);
 
 
 private:
@@ -19,7 +19,7 @@ private:
 	Vector2d velocity;
 	float acceleration;
 	BitMap bitMap;
-	HDC carDC;
+	Direction direction;
 
 };
 

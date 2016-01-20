@@ -107,7 +107,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    winParameters.w = 1000;
    winParameters.h = 800;
 
-   crossing.init(winParameters);
+   crossing.init(hInstance, winParameters);
 
    mainWnd = CreateWindowW(
 				szWindowClass, 

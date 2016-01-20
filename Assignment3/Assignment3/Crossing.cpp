@@ -20,7 +20,7 @@ Crossing::~Crossing()
 	}
 }
 
-void Crossing::init(rectangle win)
+void Crossing::init(HINSTANCE hinst, rectangle win)
 {
 	window = win;
 
@@ -42,10 +42,14 @@ void Crossing::init(rectangle win)
 	lights[NORTH]->setStop();
 	lights[SOUTH]->setStop();
 
+	cars.push_back(new Car(400, 400, NORTH));
+	cars[0]->loadBitMap(hinst, IDB_CAR ,600, 200);
+
 }
 
 void Crossing::draw(HDC drawcanvas)
 {
+
 	Rectangle(drawcanvas, crossRect.x, crossRect.y, crossRect.x + crossRect.w, crossRect.y + crossRect.h);
 	//draw cars
 	vector<Car*>::iterator carIter;
