@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Assignment3.h"
+#include "Crossing.h"
 
 #define MAX_LOADSTRING 100
 
@@ -10,8 +11,10 @@
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-int colorG = 0;
 HWND mainWnd;
+
+rectangle winParameters;
+Crossing crossing;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -99,14 +102,33 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   mainWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   winParameters.x = 400;
+   winParameters.y = 200;
+   winParameters.w = 1000;
+   winParameters.h = 800;
+
+   crossing.init(winParameters);
+
+   mainWnd = CreateWindowW(
+				szWindowClass, 
+				szTitle,
+				WS_OVERLAPPEDWINDOW,
+				winParameters.x,
+				winParameters.y,
+				winParameters.w,
+				winParameters.h,
+				nullptr,
+				nullptr,
+				hInstance,
+				nullptr
+				);
 
    if (!mainWnd)
    {
       return FALSE;
    }
-   SetTimer(mainWnd, IDT_TIMER1, 1, (TIMERPROC)NULL);
+
+   SetTimer(mainWnd, IDT_TIMER1, 1000, (TIMERPROC)NULL);
    ShowWindow(mainWnd, nCmdShow);
    UpdateWindow(mainWnd);
 
@@ -151,18 +173,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hWnd, &ps);
 			HBRUSH hBrush;
-			HGDIOBJ hOrg;
+			//HGDIOBJ hOrg;
 
+			crossing.draw(hdc);
 
-
-			SelectObject(hdc, hOrg);
-			DeleteObject(hBrush);
+			//SelectObject(hdc, hOrg);
+			//DeleteObject(hBrush);
 
 			EndPaint(hWnd, &ps);
         }
         break;
 	case WM_TIMER:
-		colorG++;
+		crossing.tick();
 		InvalidateRect(mainWnd, NULL, TRUE);
 		UpdateWindow(mainWnd);
 		break;

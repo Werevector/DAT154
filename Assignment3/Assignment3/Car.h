@@ -1,27 +1,6 @@
 #pragma once
+#include "Structs.h"
 
-struct Point{
-	float x;
-	float y;
-};
-
-struct Vector2d {
-	float x;
-	float y;
-};
-
-struct BitMap {
-	HBITMAP image;
-	int width;
-	int height;
-};
-
-enum Direction {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST
-};
 
 class Car
 {

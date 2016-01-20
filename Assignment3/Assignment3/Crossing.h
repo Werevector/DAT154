@@ -1,13 +1,9 @@
 #pragma once
 #include <vector>
 #include "Car.h"
+#include "TrafficLight.h"
+#include "Structs.h"
 using namespace std;
-
-struct TrfLight {
-	bool green = true;
-	bool yellow = false;
-	bool red = false;
-};
 
 class Crossing
 {
@@ -15,14 +11,19 @@ public:
 	Crossing();
 	~Crossing();
 
+	void init(rectangle win);
 	void draw(HDC drawcanvas);
 	void update();
+	void tick();
 
 private:
 	
 	vector<Car*> cars;
-	vector<TrfLight> trafficLights;
+	vector<TrafficLight*> lights;
 	
+	rectangle window;
+	
+	rectangle crossRect;
 
 };
 
