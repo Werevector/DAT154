@@ -37,7 +37,7 @@ void Crossing::init(HINSTANCE hinst, rectangle win)
 	lights[NORTH]->setStop();
 	lights[SOUTH]->setStop();
 
-	cars.push_back(new Car(300, 520, WEST, lights[WEST]));
+	cars.push_back(new Car(0, 520, WEST, lights[WEST]->getStatePtr()));
 	cars[0]->loadBitMap(hinst, IDB_CAR ,600, 200);
 	//cars[0]->drive();
 
@@ -107,7 +107,7 @@ void Crossing::update()
 {
 	vector<Car*>::iterator carIter;
 	for (carIter = cars.begin(); carIter != cars.end(); carIter++) {
-		(*carIter)->update();
+		(*carIter)->update(crossRect);
 	}
 }
 

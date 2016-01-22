@@ -9,6 +9,10 @@ TrafficLight::TrafficLight(int x, int y)
 	lightrect.w = 30;
 	lightrect.h = 60;
 
+	lights.green = true;
+	lights.yellow = false;
+	lights.red = false;
+
 }
 
 
@@ -86,7 +90,15 @@ void TrafficLight::tick()
 		yellow = true;
 		green = false;
 	}
+
+	lights.green = green;
+	lights.yellow = yellow;
+	lights.red = red;
 	
+}
+
+lightState* TrafficLight::getStatePtr() {
+	return &lights;
 }
 
 void TrafficLight::setPos(float x, float y)
@@ -99,10 +111,18 @@ void TrafficLight::setStop() {
 	green = false;
 	yellow = false;
 	red = true;
+
+	lights.green = false;
+	lights.yellow = false;
+	lights.red = true;
 }
 
 void TrafficLight::setGo() {
 	green = true;
 	yellow = false;
 	red = false;
+
+	lights.green = true;
+	lights.yellow = false;
+	lights.red = false;
 }

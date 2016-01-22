@@ -134,7 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   SetTimer(mainWnd, IDT_TIMER1, 1000, (TIMERPROC)NULL);
+   SetTimer(mainWnd, IDT_TIMER1, 2000, (TIMERPROC)NULL);
    ShowWindow(mainWnd, nCmdShow);
    UpdateWindow(mainWnd);
 
@@ -234,6 +234,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		crossing.resize(drawingarea);
 	}
     case WM_DESTROY:
+		KillTimer(hWnd, IDT_TIMER1);
         PostQuitMessage(0);
         break;
     default:

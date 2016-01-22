@@ -10,6 +10,7 @@ public:
 	void draw(HDC drawcanvas);
 	void update();
 	void tick();
+	lightState * getStatePtr();
 	void setPos(float x, float y);
 
 	void setStop();
@@ -22,6 +23,7 @@ private:
 	bool red = false;
 
 	rectangle lightrect;
+	lightState lights;
 
 };
 

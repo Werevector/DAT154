@@ -8,11 +8,11 @@ using namespace std;
 class Car
 {
 public:
-	Car(int x, int y, Direction dir, TrafficLight *lightptr);
+	Car(int x, int y, Direction dir, lightState *lightptr);
 	~Car();
 
 	void draw(HDC drawcanvas);
-	void update();
+	void update(rectangle crossing);
 	void drive();
 	void halt();
 
@@ -20,6 +20,7 @@ public:
 
 
 private:
+	
 	bool driving = true;
 	Point position;
 	Vector2d velocity;
@@ -28,12 +29,15 @@ private:
 	Direction direction;
 
 	void updateMovement();
-	void updateState();
+	void updateState(rectangle crossing);
 
 	Vector2d maxSpeed;
 	float maxAcceleration;
+	float breakSpeed = 2;
 
-	TrafficLight *lightptr = nullptr;
+	rectangle boundingBox;
+
+	lightState *lightptr = nullptr;
 
 };
 
