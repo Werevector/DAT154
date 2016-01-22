@@ -89,6 +89,12 @@ void TrafficLight::tick()
 	
 }
 
+void TrafficLight::setPos(float x, float y)
+{
+	lightrect.x = x;
+	lightrect.y = y;
+}
+
 void TrafficLight::setStop() {
 	green = false;
 	yellow = false;

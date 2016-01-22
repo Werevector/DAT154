@@ -15,6 +15,7 @@ public:
 	void init(HINSTANCE hinst, rectangle win);
 	void draw(HDC drawcanvas);
 	void update();
+	void resize(rectangle newWind);
 	void tick();
 
 private:

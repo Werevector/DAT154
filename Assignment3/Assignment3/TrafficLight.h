@@ -1,5 +1,4 @@
 #pragma once
-#include "Car.h"
 #include "Structs.h"
 
 class TrafficLight
@@ -11,6 +10,7 @@ public:
 	void draw(HDC drawcanvas);
 	void update();
 	void tick();
+	void setPos(float x, float y);
 
 	void setStop();
 	void setGo();

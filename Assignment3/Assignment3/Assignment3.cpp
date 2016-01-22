@@ -45,17 +45,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_ASSIGNMENT3));
 
-    MSG msg;
-
-    // Main message loop:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
+    MSG msg = { 0 };
+	while (msg.message != WM_QUIT) {
+		// Main message loop:
+		//while (GetMessage(&msg, nullptr, 0, 0))
+		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
+		crossing.update();
+		InvalidateRect(mainWnd, NULL, TRUE);
+		UpdateWindow(mainWnd);
+		
+	}
 
     return (int) msg.wParam;
 }
@@ -102,26 +108,26 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   winParameters.x = 400;
-   winParameters.y = 200;
-   winParameters.w = 1000;
-   winParameters.h = 800;
+   winParameters.x = 100;
+   winParameters.y = 10;
+   winParameters.w = 1700;
+   winParameters.h = 1000;
 
-   crossing.init(hInstance, winParameters);
+   
 
    mainWnd = CreateWindowW(
-				szWindowClass, 
-				szTitle,
-				WS_OVERLAPPEDWINDOW,
-				winParameters.x,
-				winParameters.y,
-				winParameters.w,
-				winParameters.h,
-				nullptr,
-				nullptr,
-				hInstance,
-				nullptr
-				);
+	   szWindowClass,
+	   szTitle,
+	   WS_OVERLAPPEDWINDOW,
+	   winParameters.x,
+	   winParameters.y,
+	   winParameters.w,
+	   winParameters.h,
+	   nullptr,
+	   nullptr,
+	   hInstance,
+	   nullptr
+	   );
 
    if (!mainWnd)
    {
@@ -149,7 +155,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+	case WM_CREATE:
+	{
+		RECT area;
+		GetClientRect(hWnd, &area);
 
+		rectangle drawingarea;
+		drawingarea.x = area.left;
+		drawingarea.y = area.top;
+		drawingarea.w = area.right;
+		drawingarea.h = area.bottom;
+
+		crossing.init(hInst, drawingarea);
+	}
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -172,22 +190,49 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hWnd, &ps);
-			HBRUSH hBrush;
-			//HGDIOBJ hOrg;
+			RECT rect;
+			GetClientRect(hWnd, &rect);
+			int width = rect.right;
+			int height = rect.bottom;
 
-			crossing.draw(hdc);
+			HDC backbufferDC = CreateCompatibleDC(hdc);
+			HBITMAP backbuffer = CreateCompatibleBitmap(hdc, width, height);
 
-			//SelectObject(hdc, hOrg);
-			//DeleteObject(hBrush);
+			int savedDC = SaveDC(backbufferDC);
+			SelectObject(backbufferDC, backbuffer);
+			HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
+			FillRect(backbufferDC, &rect, hBrush);
+			DeleteObject(hBrush);
+
+			crossing.draw(backbufferDC);
+
+			BitBlt(hdc, 0, 0, width, height, backbufferDC, 0, 0, SRCCOPY);
+			RestoreDC(backbufferDC, savedDC);
+
+			DeleteObject(backbuffer);
+			DeleteDC(backbufferDC);
 
 			EndPaint(hWnd, &ps);
         }
         break;
 	case WM_TIMER:
 		crossing.tick();
-		InvalidateRect(mainWnd, NULL, TRUE);
-		UpdateWindow(mainWnd);
 		break;
+	case WM_ERASEBKGND:
+		return 1;
+	case WM_SIZING:
+	{
+		//DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+		RECT area;
+		GetClientRect(hWnd, &area);
+
+		rectangle drawingarea;
+		drawingarea.x = area.left;
+		drawingarea.y = area.top;
+		drawingarea.w = area.right;
+		drawingarea.h = area.bottom;
+		crossing.resize(drawingarea);
+	}
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

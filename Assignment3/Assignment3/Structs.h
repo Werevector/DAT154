@@ -28,3 +28,9 @@ struct rectangle {
 	int w;
 	int h;
 };
+
+struct lightState {
+	bool red;
+	bool yellow;
+	bool green;
+};
