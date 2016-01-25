@@ -21,6 +21,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK	Spawn(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -168,6 +169,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		crossing.init(hInst, drawingarea);
 		SetTimer(mainWnd, IDT_TIMER1, 1000, (TIMERPROC)NULL);
+
+		//HWND hwndButton = CreateWindow(
+		//	L"BUTTON",  // Predefined class; Unicode assumed 
+		//	L"OK",      // Button text 
+		//	WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+		//	10,         // x position 
+		//	10,         // y position 
+		//	50,        // Button width
+		//	50,        // Button height
+		//	hWnd,     // Parent window
+		//	NULL,       // No menu.
+		//	(HINSTANCE)GetWindowLong(hWnd, IDM_SPAWN),
+		//	NULL);      // Pointer not needed.
+
 	}
     case WM_COMMAND:
         {
@@ -178,6 +193,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;
+			case IDM_SPAWN:
+				DialogBox(hInst, MAKEINTRESOURCE(IDD_SPAWN), hWnd, Spawn);
+				break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
                 break;
@@ -258,6 +276,39 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
+}
+
+INT_PTR CALLBACK Spawn(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	UNREFERENCED_PARAMETER(lParam);
+
+	int pw;
+	int pn;
+
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		return (INT_PTR)TRUE;
+
+	case WM_HSCROLL:
+		
+	case WM_COMMAND:
+		switch (wParam) {
+		case IDOK:
+			pn = GetDlgItemInt(hWnd, IDC_EDITPN, NULL, FALSE);
+			pw = GetDlgItemInt(hWnd, IDC_EDITPW, NULL, FALSE);
+			
+			crossing.setSpawnRate(pw, pn);
+
+			EndDialog(hWnd, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+		case IDCANCEL:
+			EndDialog(hWnd, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+
+		}
+		break;
+	}
+	return (INT_PTR)FALSE;
 }
 
 // Message handler for about box.

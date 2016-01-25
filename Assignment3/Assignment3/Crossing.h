@@ -17,6 +17,7 @@ public:
 	void draw(HDC drawcanvas);
 	void update();
 	void checkOutofBounds();
+	void setSpawnRate(int pw, int pn);
 	void resize(rectangle newWind);
 	void tick();
 	void pwUP();

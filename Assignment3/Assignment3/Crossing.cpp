@@ -203,6 +203,11 @@ void Crossing::checkOutofBounds() {
 	}
 }
 
+void Crossing::setSpawnRate(int pw, int pn) {
+	this->pn = pn;
+	this->pw = pw;
+}
+
 void Crossing::resize(rectangle newWind)
 {
 	window = newWind;
