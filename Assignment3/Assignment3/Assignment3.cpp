@@ -110,7 +110,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    winParameters.x = 100;
    winParameters.y = 10;
-   winParameters.w = 1700;
+   winParameters.w = 1000;
    winParameters.h = 1000;
 
    
@@ -167,6 +167,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		drawingarea.h = area.bottom;
 
 		crossing.init(hInst, drawingarea);
+		SetTimer(mainWnd, IDT_TIMER1, 1000, (TIMERPROC)NULL);
 	}
     case WM_COMMAND:
         {
@@ -186,6 +187,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+	case WM_KEYDOWN:
+		switch (wParam) {
+		case VK_LEFT:
+			crossing.pwDOWN();
+			break;
+		case VK_RIGHT:
+			crossing.pwUP();
+			break;
+		case VK_UP:
+			crossing.pnUP();
+			break;
+		case VK_DOWN:
+			crossing.pnDOWN();
+			break;
+		}
+		break;
     case WM_PAINT:
         {
 			PAINTSTRUCT ps;

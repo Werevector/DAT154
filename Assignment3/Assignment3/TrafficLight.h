@@ -17,7 +17,7 @@ public:
 	void setGo();
 	
 private:
-
+	
 	bool green = true;
 	bool yellow = false;
 	bool red = false;

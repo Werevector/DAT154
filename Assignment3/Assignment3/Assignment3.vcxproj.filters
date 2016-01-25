@@ -75,5 +75,11 @@
     <Image Include="carbmp.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="carbmptop.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="background.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

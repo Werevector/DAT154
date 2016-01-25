@@ -13,15 +13,30 @@ public:
 	~Crossing();
 
 	void init(HINSTANCE hinst, rectangle win);
+	void placeCar(Direction dir);
 	void draw(HDC drawcanvas);
 	void update();
+	void checkOutofBounds();
 	void resize(rectangle newWind);
 	void tick();
+	void pwUP();
+	void pwDOWN();
+	void pnUP();
+	void pnDOWN();
 
 private:
 	
-	vector<Car*> cars;
+	BitMap backGround;
+
+	vector<Car*> northcars;
+	vector<Car*> westcars;
+
+	//percent chance of car spawn
+	int pw;
+	int pn; 
+
 	vector<TrafficLight*> lights;
+	HINSTANCE hinst;
 	
 	rectangle window;
 	

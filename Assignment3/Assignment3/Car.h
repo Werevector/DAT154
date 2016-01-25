@@ -13,8 +13,16 @@ public:
 
 	void draw(HDC drawcanvas);
 	void update(rectangle crossing);
+	
+	rectangle* getBounding();
+	
+	void setNextCar(rectangle * next);
+	void freeNextCar();
+	
 	void drive();
 	void halt();
+
+	bool outsideRect(rectangle rect);
 
 	bool loadBitMap(HINSTANCE hInst, int IDB, int w, int h);
 
@@ -29,13 +37,15 @@ private:
 	Direction direction;
 
 	void updateMovement();
+	
 	void updateState(rectangle crossing);
 
 	Vector2d maxSpeed;
 	float maxAcceleration;
-	float breakSpeed = 2;
+	float breakAcc = -20;
 
 	rectangle boundingBox;
+	rectangle* nextCarBounding;
 
 	lightState *lightptr = nullptr;
 

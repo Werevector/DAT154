@@ -10,18 +10,26 @@ Car::Car(int x, int y, Direction dir, lightState *lightptr)
 	velocity.x = 0;
 	velocity.y = 0;
 
-	maxSpeed.x = 5;
+	maxSpeed.x = 1;
 	maxSpeed.y = 1;
 
 	acceleration = 0;
-	maxAcceleration = 2;
+	maxAcceleration = 5;
 
 	direction = dir;
 
+	switch (dir) {
+	case WEST:
+		boundingBox.w = 100;
+		boundingBox.h = 50;
+		break;
+	case NORTH:
+		boundingBox.w = 50;
+		boundingBox.h = 100;
+	}
+
 	boundingBox.x = x;
 	boundingBox.y = y;
-	boundingBox.w = 100;
-	boundingBox.h = 50;
 
 	this->lightptr = lightptr;
 
@@ -35,27 +43,31 @@ Car::~Car()
 
 void Car::draw(HDC drawcanvas)
 {
-	int nx = position.x - (boundingBox.w / 2);
-	int ny = position.y - (boundingBox.h / 2);
+
+	int nx = boundingBox.x;
+	int ny = boundingBox.y;
 
 	HDC carDC = CreateCompatibleDC(drawcanvas);
-
-	
+	//HDC stretched = CreateCompatibleDC(drawcanvas);
 
 	SelectObject(carDC, bitMap.image);
 	
-	SetStretchBltMode(carDC, BLACKONWHITE);
-	StretchBlt(drawcanvas, nx, ny, boundingBox.w, boundingBox.h, carDC, 0,0,600,200, SRCCOPY);
+	SetStretchBltMode(carDC, COLORONCOLOR);
+	//StretchBlt(stretched, nx, ny, boundingBox.w, boundingBox.h, carDC, 0,0,bitMap.width,bitMap.height, SRCCOPY);
+	
+	bool d = TransparentBlt(
+		drawcanvas, 
+		nx, ny, 
+		boundingBox.w, boundingBox.h, 
+		carDC,
+		0, 0, 
+		boundingBox.w, boundingBox.h,
+		RGB(128, 128, 128));
 
-	wstring sp = _T("speedX: " + to_wstring(velocity.x));
-	wstring a = _T("acceleration: " + to_wstring(acceleration));
-
-	TextOut(drawcanvas, 10, 10, sp.c_str(), sp.size());
-	TextOut(drawcanvas, 10, 30, a.c_str(), a.size());
-
-	Rectangle(drawcanvas, position.x - 5, position.y - 5, position.x + 10, position.y + 10);
+	//Rectangle(drawcanvas, position.x, position.y, position.x+10, position.y+10);
 
 	DeleteObject(carDC);
+	//DeleteObject(stretched);
 
 }
 
@@ -66,6 +78,17 @@ void Car::update(rectangle crossing)
 
 }
 
+rectangle* Car::getBounding() {
+	return &boundingBox;
+}
+
+void Car::setNextCar(rectangle* next) {
+	nextCarBounding = next;
+}
+
+void Car::freeNextCar() {
+	nextCarBounding = nullptr;
+}
 
 void Car::updateMovement()
 {
@@ -82,7 +105,7 @@ void Car::updateMovement()
 	}
 	else {
 		if (velocity.x > 0 || velocity.y > 0) {
-			acceleration -= breakSpeed;
+			acceleration = breakAcc;
 		}
 		else {
 			acceleration = 0;
@@ -102,6 +125,20 @@ void Car::updateMovement()
 
 	position.x += velocity.x;
 	position.y += velocity.y;
+
+	boundingBox.x = position.x;
+	boundingBox.y = position.y;
+}
+
+bool Car::outsideRect(rectangle rect) {
+	bool result = false;
+	
+	if (position.x > rect.x + rect.w || 
+		position.y > rect.y + rect.h||
+		position.x < rect.x ||
+		position.y < rect.y)
+		result = true;
+	return result;
 }
 
 void Car::updateState(rectangle crossing)
@@ -109,20 +146,26 @@ void Car::updateState(rectangle crossing)
 	float vel;
 	float carpos;
 	float crosspoint;
+
+	if (nextCarBounding != nullptr) {
+		if (nextCarBounding->x < crossing.x || nextCarBounding->y < crossing.y)
+			crossing = *nextCarBounding;
+	}
+	
 	switch (direction) {
 	case WEST:
 		vel = velocity.x;
 		crosspoint = crossing.x;
-		carpos = position.x;
+		carpos = position.x + boundingBox.w;
+		break;
 	case NORTH:
 		vel = velocity.y;
 		crosspoint = crossing.y;
-		carpos = position.y;
+		carpos = position.y + boundingBox.h;
+		break;
 	}
 
-	float stopLength = (velocity.x * velocity.x) / breakSpeed ;
-
-	if (carpos > crosspoint - stopLength && carpos < crosspoint) {
+	if (carpos > crosspoint-15 && carpos < crosspoint) {
 		if (lightptr->green) {
 			driving = true;
 		}
