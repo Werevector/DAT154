@@ -42,7 +42,7 @@ private:
 
 	Vector2d maxSpeed;
 	float maxAcceleration;
-	float breakAcc = -20;
+	float breakAcc = -1;
 
 	rectangle boundingBox;
 	rectangle* nextCarBounding;

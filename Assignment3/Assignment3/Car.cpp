@@ -10,8 +10,8 @@ Car::Car(int x, int y, Direction dir, lightState *lightptr)
 	velocity.x = 0;
 	velocity.y = 0;
 
-	maxSpeed.x = 1;
-	maxSpeed.y = 1;
+	maxSpeed.x = 3;
+	maxSpeed.y = 2;
 
 	acceleration = 0;
 	maxAcceleration = 5;
@@ -104,7 +104,7 @@ void Car::updateMovement()
 		}
 	}
 	else {
-		if (velocity.x > 0 || velocity.y > 0) {
+		if (velocity.x > 0 && velocity.y > 0) {
 			acceleration = breakAcc;
 		}
 		else {
@@ -134,9 +134,10 @@ bool Car::outsideRect(rectangle rect) {
 	bool result = false;
 	
 	if (position.x > rect.x + rect.w || 
-		position.y > rect.y + rect.h||
-		position.x < rect.x ||
-		position.y < rect.y)
+		position.y > rect.y + rect.h
+		//position.x < rect.x ||
+		//position.y < rect.y
+		)
 		result = true;
 	return result;
 }
@@ -165,7 +166,7 @@ void Car::updateState(rectangle crossing)
 		break;
 	}
 
-	if (carpos > crosspoint-15 && carpos < crosspoint) {
+	if (carpos > crosspoint-15 && carpos < crosspoint+5) {
 		if (lightptr->green) {
 			driving = true;
 		}

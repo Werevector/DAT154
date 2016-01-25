@@ -52,7 +52,7 @@ void Crossing::placeCar(Direction dir) {
 			if (westcars[westcars.size() - 1]->getBounding()->x < 50)
 				break;
 
-		ncar = new Car(0, 490, dir, lights[dir]->getStatePtr());
+		ncar = new Car(-200, 490, dir, lights[dir]->getStatePtr());
 		ncar->loadBitMap(hinst, IDB_CAR, 600, 200);
 		
 		if(!empty)
@@ -67,7 +67,7 @@ void Crossing::placeCar(Direction dir) {
 			if (northcars[northcars.size() - 1]->getBounding()->y < 50)
 				break;
 
-		ncar = new Car(500, 0, dir, lights[dir]->getStatePtr());
+		ncar = new Car(500, -200, dir, lights[dir]->getStatePtr());
 		ncar->loadBitMap(hinst, IDB_BITMAP2, 200, 600);
 		
 		if (!empty)
@@ -185,11 +185,20 @@ void Crossing::update()
 void Crossing::checkOutofBounds() {
 	for (int i = 0; i < northcars.size(); i++) {
 		if (northcars[i]->outsideRect(window)) {
-			if (i != 0)
-				northcars[i - 1]->freeNextCar();
+			if(northcars.size() != 1)
+				northcars[i + 1]->freeNextCar();
 
 			delete northcars[i];
 			northcars.erase(northcars.begin() + i);
+		}
+	}
+	for (int i = 0; i < westcars.size(); i++) {
+		if (westcars[i]->outsideRect(window)) {
+			if (westcars.size() != 1)
+				westcars[i + 1]->freeNextCar();
+
+			delete westcars[i];
+			westcars.erase(westcars.begin() + i);
 		}
 	}
 }

@@ -134,7 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   SetTimer(mainWnd, IDT_TIMER1, 2000, (TIMERPROC)NULL);
+   SetTimer(mainWnd, IDT_TIMER1, 3000, (TIMERPROC)NULL);
    ShowWindow(mainWnd, nCmdShow);
    UpdateWindow(mainWnd);
 
