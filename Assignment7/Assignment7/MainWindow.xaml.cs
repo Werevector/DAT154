@@ -23,6 +23,50 @@ namespace Assignment7
         public MainWindow()
         {
             InitializeComponent();
+            StudentViewModel model = new StudentViewModel();
+            this._studentGrid.ItemsSource = model.getData();
+        }
+
+    }
+
+    public class StudentViewModel
+    {
+
+        List<Student> _data = new List<Student>();
+        List<Student> Data = new List<Student>();
+
+        public List<Student> getData()
+        {
+            Data = _data;
+            return Data;
+        }
+
+        public StudentViewModel()
+        {
+            _data.Add(new Student());
+            _data.Add(new Student("Karl" , "C", "INF121"));
+            _data.Add(new Student("Anne", "B", "INF121"));
+        }
+
+    }
+
+    public class Student
+    {
+        public String Name { get; set; }
+        public String Grade { get; set; }
+        public String Class { get; set; }
+
+        public Student()
+        {
+            Name = "Tore";
+            Grade = "A";
+            Class = "DAT101";
+        }
+        public Student(String n, String g, String c)
+        {
+            Name = n;
+            Grade = g;
+            Class = c;
         }
     }
 }

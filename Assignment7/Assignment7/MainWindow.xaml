@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Assignment7"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <DataGrid Name="_studentGrid">
+    </DataGrid>
 </Window>
