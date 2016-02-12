@@ -22,16 +22,17 @@ namespace Assignment7
             return null;
         }
 
-        public List<Student> selectCourse()
+        public List<Student> selectCourse(String course)
         {
-            //List<Student> std = dao.selectCourse(name);
+            //List<Student> std = dao.selectCourse(course);
 
             return null;
         }
 
-        public void showGrades()
+        public List<String> showGrades(String grade)
         {
-
+            //List grades = dao.getGradesBetterThanThis(grade)
+            return null;
         }
 
         public void ListFailures(String grade)
