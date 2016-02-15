@@ -13,36 +13,53 @@ namespace Assignment7
     class Controller
     {
 
+        public delegate void modelChanged(List<Student> data);
+        public event modelChanged modelChangeEvent;
+        
+        //DUMMY
+        List<Student> sdata = new List<Student>();
 
-        public List<Student> searchForStudent (String name)
+        public Controller()
+        {
+            //DUMMY
+            Student s = new Student();
+            Student s2 = new Student("Tore", "C", "DAT150");
+            sdata.Add(s);
+            sdata.Add(s2);
+        }
+
+        public void searchForStudent (String name)
         {
             //fra String til dao passende type ??
             // dao.searchForStudents(name)
             // fra dao type tilbake til liste std2, dette er det viktigste denne metoden gjør
-            return null;
         }
 
-        public List<Student> selectCourse(String course)
+        public void getAllStudent()
+        {
+            if (modelChangeEvent != null)
+            {
+                modelChangeEvent(sdata);
+            }
+        }
+
+        public void selectCourse(String course)
         {
             //List<Student> std = dao.selectCourse(course);
 
-            return null;
         }
 
-        public List<String> showGrades(String grade)
+        public void showGrades(String grade)
         {
             //List grades = dao.getGradesBetterThanThis(grade)
-            return null;
         }
 
-        public void ListFailures(String grade)
+        public void ListFailures()
         {
             // hmm, hvordan gjøre denne bedre??
             //List<Student> std = dao.listStudentsByGrade(grade);
             //View.displayStudentAttribute(std[i])
         }
-
-        // View logikk videre her, hvis view ønsker å gjøre noe som krever logikk ...
 
     }
 }

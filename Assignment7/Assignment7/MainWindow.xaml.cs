@@ -18,19 +18,18 @@ namespace Assignment7
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
+        delegate int modelChangedDelegate(List<Student> data);
+
+        Controller control;
+
         public MainWindow()
         {
             InitializeComponent();
-
-            Controller DAO = new Controller();
-            Student s = new Student(); ;
-            List<Student> data = new List<Student>();
-            data.Add(s);
-            data.Add(s);
-
-            studentView.ItemsSource = data;
+            control = new Controller();
+            control.modelChangeEvent += modelChanged;
 
             /**
             the controller object should connect to a specific model somehow, probably subscribing to a couple of functions and such.
@@ -38,6 +37,27 @@ namespace Assignment7
             **/
 
             //this._studentGrid.ItemsSource = DAO.getAllStudents();
+        }
+
+        private void courseButton_Click(object sender, RoutedEventArgs e)
+        {
+            control.getAllStudent();
+            control.selectCourse("ING101");
+        }
+
+        private void failButton_Click(object sender, RoutedEventArgs e)
+        {
+            control.ListFailures();
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void modelChanged(List<Student> data)
+        {
+            studentView.ItemsSource = data;
         }
     }
 
