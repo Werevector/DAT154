@@ -5,7 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment7"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <DataGrid Name="_studentGrid">
-    </DataGrid>
+        Title="MainWindow" Height="450" Width="525">
+    <Grid Height="418" VerticalAlignment="Top" Width="515">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="373*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Name="studentView" Grid.Row="1"></DataGrid>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="363,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="failButton" Content="Failed" HorizontalAlignment="Left" Margin="95,12,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
+        <Button x:Name="courseButton" Content="Courses" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
+        <Label x:Name="label" Content="Search:" HorizontalAlignment="Left" Margin="310,9,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.461,0.499" Width="48"/>
+
+    </Grid>
 </Window>

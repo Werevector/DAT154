@@ -25,6 +25,12 @@ namespace Assignment7
             InitializeComponent();
 
             Controller DAO = new Controller();
+            Student s = new Student(); ;
+            List<Student> data = new List<Student>();
+            data.Add(s);
+            data.Add(s);
+
+            studentView.ItemsSource = data;
 
             /**
             the controller object should connect to a specific model somehow, probably subscribing to a couple of functions and such.
@@ -33,7 +39,6 @@ namespace Assignment7
 
             //this._studentGrid.ItemsSource = DAO.getAllStudents();
         }
-
     }
 
 }
