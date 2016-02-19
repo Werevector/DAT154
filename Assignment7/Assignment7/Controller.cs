@@ -13,7 +13,6 @@ namespace Assignment7
     class Controller
     {
 
-
         public List<Student> searchForStudent (String name)
         {
             //fra String til dao passende type ??
