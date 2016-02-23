@@ -20,6 +20,8 @@ namespace HotelDesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public RoomView roomView = new RoomView();
+
         public MainWindow()
         {
             InitializeComponent();

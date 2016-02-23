@@ -9,6 +9,13 @@
     <Grid>
         <Image x:Name="image" Source="hotel-room.jpg" HorizontalAlignment="Left" Height="56" Margin="22,29,0,0" VerticalAlignment="Top" Width="97"/>
         <Button x:Name="reserve" Content="Reserve" HorizontalAlignment="Left" Margin="22,239,0,0" VerticalAlignment="Top" Width="75"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="100" Margin="139,29,0,0" VerticalAlignment="Top" Width="100">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>
