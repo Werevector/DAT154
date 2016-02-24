@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelDesktopApp"
         mc:Ignorable="d"
-        Title="Hotel Manager" Height="350" Width="350">
+        Title="Hotel Manager" Height="427" Width="650">
     <Grid>
-        
+
     </Grid>
 </Window>
