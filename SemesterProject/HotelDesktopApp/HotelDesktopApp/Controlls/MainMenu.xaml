@@ -33,7 +33,7 @@
             </TabItem>
             <TabItem Header="Reservation">
                 <Grid Background="#FFE5E5E5">
-                    <GroupBox x:Name="InfoBox_Copy" Background="White" Header="Info" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="292" Width="260">
+                    <GroupBox x:Name="InfoBox_Copy" Background="White" Header="Info" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="292" Width="201">
                         <Grid Height="263" Margin="10,10,-2,-3" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -62,14 +62,30 @@
                             </TreeView>
                         </Grid>
                     </GroupBox>
-                    <Button x:Name="EditReservationBtn" Content="Edit" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="EditReservationBtn" Content="Edit" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Width="75" Click="EditReservationBtn_Click"/>
+                    <Button x:Name="customerBtn" Content="Customer" HorizontalAlignment="Left" Margin="109,318,0,0" VerticalAlignment="Top" Width="75" Click="customerBtn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Service">
+                <Grid>
+                    <GroupBox x:Name="servicesGrpBx" Background="BlanchedAlmond" Header="Services" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="327" Width="249">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Name="serviceStack" Orientation="Vertical"></StackPanel>
+                        </ScrollViewer>
+                    </GroupBox>
+
+                </Grid>
 
             </TabItem>
             <TabItem Header="Maintenance">
+                <Grid>
+                    <GroupBox x:Name="maintenanceGrpBx" Background="LightCyan" Header="Maintenance" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="327" Width="249">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Name="maintenanceStack" Orientation="Vertical"></StackPanel>
+                        </ScrollViewer>
+                    </GroupBox>
 
+                </Grid>
             </TabItem>
         </TabControl>
 

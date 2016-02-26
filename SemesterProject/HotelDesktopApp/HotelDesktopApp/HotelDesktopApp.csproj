@@ -81,9 +81,15 @@
     <Compile Include="Controlls\RoomMenu.xaml.cs">
       <DependentUpon>RoomMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomerInfoWindow.xaml.cs">
+      <DependentUpon>CustomerInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ISwitchable.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReservationEditorWindow.xaml.cs">
+      <DependentUpon>ReservationEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RoomView.xaml.cs">
       <DependentUpon>RoomView.xaml</DependentUpon>
@@ -94,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlls\RoomMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,6 +120,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReservationEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,7 +160,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\portrait.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\hotelroom.jpg" />
   </ItemGroup>
