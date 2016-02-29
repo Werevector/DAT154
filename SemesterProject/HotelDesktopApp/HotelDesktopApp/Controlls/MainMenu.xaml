@@ -11,7 +11,7 @@
             <ColumnDefinition Width="223*"/>
             <ColumnDefinition Width="416*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="roomDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" 
+        <DataGrid x:Name="roomDataGrid" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" 
                   ColumnWidth="*" Height="387" Width="223" SelectionChanged="roomDataGrid_SelectionChanged"
                   AlternatingRowBackground="LightGray">
             <DataGrid.Columns>

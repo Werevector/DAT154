@@ -46,7 +46,7 @@ namespace HotelDesktopApp.Controlls
         public int cstmr_ID { get; set; }
         public string name { get; set; }
         public string birthDate { get; set; }
-        public int cardNr { get; set; }
+        public long cardNr { get; set; }
     }
 
     public class Maintenance
@@ -199,7 +199,7 @@ namespace HotelDesktopApp.Controlls
             maintenanceStack.Children.Clear();
         }
 
-        private void roomDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void populateSelectionData()
         {
             selRoom = (Room)roomDataGrid.SelectedItem;
 
@@ -256,7 +256,11 @@ namespace HotelDesktopApp.Controlls
                     populateMaintenance(selRoom);
                 }
             }
+        }
 
+        private void roomDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            populateSelectionData();
         }
 
         private void refreshBtn_Click(object sender, RoutedEventArgs e)
@@ -278,7 +282,19 @@ namespace HotelDesktopApp.Controlls
             if(currentResv != null)
             {
                 ReservationEditorWindow rew = new ReservationEditorWindow(currentResv);
-                rew.Show();
+                rew.ShowDialog();
+                pollRestSrvr();
+                populateSelectionData();
+            }
+            else
+            {
+                if (selRoom != null)
+                {
+                    ReservationAdd rea = new ReservationAdd(selRoom);
+                    rea.ShowDialog();
+                    pollRestSrvr();
+                    populateSelectionData();
+                }
             }
         }
     }

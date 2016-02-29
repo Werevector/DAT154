@@ -42,7 +42,9 @@ namespace HotelDesktopApp
 
         private void editCustmrBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            EditCustomerWindow ecw = new EditCustomerWindow(selectedCustomer);
+            ecw.Show();
+            this.Close();
         }
     }
 }

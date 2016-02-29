@@ -1,0 +1,19 @@
+﻿<Window x:Class="HotelDesktopApp.CustomerAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelDesktopApp"
+        mc:Ignorable="d"
+        Title="CustomerAdd" Height="204.919" Width="263.671">
+    <Grid>
+        <Image Source="Images/portrait.jpg" Margin="145,0,0,80" HorizontalAlignment="Left" Width="90" Height="88" VerticalAlignment="Bottom"></Image>
+        <Button x:Name="okBtn" Content="Ok" HorizontalAlignment="Left" Margin="7,144,0,0" VerticalAlignment="Top" Width="75" Click="okBtn_Click"/>
+        <DatePicker Name="datePicker" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Birth" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="10,12,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="nameBox" TextAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="139,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"/>
+        <Label Content="Name" HorizontalContentAlignment="Center" TextBlock.Foreground="BlueViolet" TextBlock.FontFamily="Times New Roman" Width="90" Margin="145,128,21,0" Height="21" VerticalAlignment="Top"></Label>
+        <Label x:Name="label_Copy" Content="Card Number" HorizontalAlignment="Left" TextElement.FontWeight="Bold" Margin="10,79,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="cardNumberBox" HorizontalAlignment="Left" Height="23" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

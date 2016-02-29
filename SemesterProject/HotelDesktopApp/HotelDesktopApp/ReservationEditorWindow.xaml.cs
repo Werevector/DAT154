@@ -38,11 +38,6 @@ namespace HotelDesktopApp
 
         }
 
-        public ReservationEditorWindow()
-        {
-            InitializeComponent();
-        }
-
         private void okBtn_Click(object sender, RoutedEventArgs e)
         {
             reservation.startDate = fromDate.SelectedDate.Value.ToString("yyyy-MM-dd");
@@ -58,7 +53,8 @@ namespace HotelDesktopApp
             HttpClient client = new HttpClient();
             string URL = "http://92.221.124.167";
             client.BaseAddress = new Uri(URL);
-            HttpResponseMessage response = await client.PostAsJsonAsync("/rest/edit/reservation", reservation).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()); ;
+            HttpResponseMessage response = await client.PutAsJsonAsync("/rest/edit/reservation", reservation).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+            this.Close();
         }
 
     }

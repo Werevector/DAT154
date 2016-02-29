@@ -78,15 +78,21 @@
     <Compile Include="Controlls\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlls\RoomMenu.xaml.cs">
-      <DependentUpon>RoomMenu.xaml</DependentUpon>
+    <Compile Include="CustomerAdd.xaml.cs">
+      <DependentUpon>CustomerAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomerInfoWindow.xaml.cs">
       <DependentUpon>CustomerInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditCustomerWindow.xaml.cs">
+      <DependentUpon>EditCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ISwitchable.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReservationAdd.xaml.cs">
+      <DependentUpon>ReservationAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReservationEditorWindow.xaml.cs">
       <DependentUpon>ReservationEditorWindow.xaml</DependentUpon>
@@ -99,11 +105,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlls\RoomMenu.xaml">
+    <Page Include="CustomerAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomerInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReservationAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
