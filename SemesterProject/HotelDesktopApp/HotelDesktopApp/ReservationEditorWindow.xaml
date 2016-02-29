@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HotelDesktopApp"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ReservationEditorWindow" Height="224.824" Width="205.855">
+        Title="Reservation Editor" Height="224.824" Width="205.855">
     <Grid>
         <Button x:Name="okBtn" Content="Ok" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="75" Click="okBtn_Click"/>
         <Grid HorizontalAlignment="Left" Height="196" VerticalAlignment="Top" Width="200">
