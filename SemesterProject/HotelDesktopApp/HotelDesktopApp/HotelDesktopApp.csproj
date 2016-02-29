@@ -91,6 +91,9 @@
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterServMaintWindow.xaml.cs">
+      <DependentUpon>RegisterServMaintWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReservationAdd.xaml.cs">
       <DependentUpon>ReservationAdd.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterServMaintWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

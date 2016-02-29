@@ -28,17 +28,17 @@
                         <Label Content="Reserved:"></Label>
                         <Label Name="reservedLbl"  Content="" TextElement.Foreground="Red"></Label>
                     </StackPanel>
-                    <Button x:Name="refreshBtn" Content="Refresh" HorizontalAlignment="Left" Margin="28,329,0,0" VerticalAlignment="Top" Width="75" Click="refreshBtn_Click"/>
+                    <Button x:Name="refreshBtn" Content="Refresh" HorizontalAlignment="Left" Margin="37,329,0,0" VerticalAlignment="Top" Width="75" Click="refreshBtn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Reservation">
                 <Grid Background="#FFE5E5E5">
-                    <GroupBox x:Name="InfoBox_Copy" Background="White" Header="Info" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="292" Width="201">
+                    <GroupBox x:Name="InfoBox_Copy" Background="White" Header="Info" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="292" Width="235">
                         <Grid Height="263" Margin="10,10,-2,-3" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TreeView x:Name="treeView1" HorizontalAlignment="Left" Width="168" Height="253" VerticalAlignment="Top">
+                            <TreeView x:Name="treeView1" HorizontalAlignment="Left" Width="205" Height="253" VerticalAlignment="Top">
                                 <TreeViewItem Header="Reserved" IsExpanded="True" >
                                     <TreeViewItem x:Name="isReserved" Header="Nothing Selected" TextElement.Foreground="Gray" HorizontalAlignment="Left" Width="136"/>
                                 </TreeViewItem>
@@ -63,7 +63,8 @@
                         </Grid>
                     </GroupBox>
                     <Button x:Name="EditReservationBtn" Content="Edit" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" Width="75" Click="EditReservationBtn_Click"/>
-                    <Button x:Name="customerBtn" Content="Customer" HorizontalAlignment="Left" Margin="109,318,0,0" VerticalAlignment="Top" Width="75" Click="customerBtn_Click"/>
+                    <Button x:Name="customerBtn" Content="Customer" HorizontalAlignment="Left" Margin="130,318,0,0" VerticalAlignment="Top" Width="75" Click="customerBtn_Click"/>
+                    <Button x:Name="checkOutBtn" Content="Check Out" HorizontalAlignment="Left" Margin="277,271,0,0" VerticalAlignment="Top" Width="101" Click="checkOutBtn_Click" Height="31"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Service">
@@ -73,7 +74,7 @@
                             <StackPanel Name="serviceStack" Orientation="Vertical"></StackPanel>
                         </ScrollViewer>
                     </GroupBox>
-
+                    <Button Name="registerServiceBtn" Margin="275,308,27,22" Content="Register Service" Click="registerServiceBtn_Click"/>
                 </Grid>
 
             </TabItem>
@@ -84,6 +85,7 @@
                             <StackPanel Name="maintenanceStack" Orientation="Vertical"></StackPanel>
                         </ScrollViewer>
                     </GroupBox>
+                    <Button Name="registerMntncBtn" Margin="275,308,10,22" Content="Register Maintenance" Click="registerMntncBtn_Click"/>
 
                 </Grid>
             </TabItem>

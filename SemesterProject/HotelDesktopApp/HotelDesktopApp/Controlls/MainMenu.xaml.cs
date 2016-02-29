@@ -84,57 +84,103 @@ namespace HotelDesktopApp.Controlls
             InitializeComponent();
             roomDataGrid.AutoGenerateColumns = false;
             pollRestSrvr();
-
         }
 
-        private void pollRestSrvr()
+       
+        ////////////
+        //EVENTS
+        ////////////
+        private void roomDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            HttpResponseMessage response = client.GetAsync("listing/rooms").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                roomObjects = response.Content.ReadAsAsync<IEnumerable<Room>>().Result;
-                roomDataGrid.ItemsSource = roomObjects;
-            }
-
-            response = client.GetAsync("listing/reservations").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                reservationObjects = response.Content.ReadAsAsync<IEnumerable<Reservation>>().Result;
-            }
-
-            response = client.GetAsync("listing/customers").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                customerObjects = response.Content.ReadAsAsync<IEnumerable<Customer>>().Result;
-            }
-
-            response = client.GetAsync("listing/services").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                serviceObjects = response.Content.ReadAsAsync<IEnumerable<Service>>().Result;
-            }
-
-            response = client.GetAsync("listing/maintenance").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                maintenanceObjects = response.Content.ReadAsAsync<IEnumerable<Maintenance>>().Result;
-            }
-
+            populateSelectionData();
         }
 
+        private void refreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pollRestSrvr();
+        }
+
+        private void customerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentCustomer != null)
+            {
+                CustomerInfoWindow ciw = new CustomerInfoWindow(currentCustomer);
+                ciw.Show();
+            }
+        }
+
+        private void EditReservationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(currentResv != null)
+            {
+                ReservationEditorWindow rew = new ReservationEditorWindow(currentResv);
+                rew.ShowDialog();
+                pollRestSrvr();
+                populateSelectionData();
+            }
+            else
+            {
+                if (selRoom != null)
+                {
+                    Room tempR = selRoom;
+                    ReservationAdd rea = new ReservationAdd(selRoom);
+                    rea.ShowDialog();
+                    pollRestSrvr();
+                    roomDataGrid.SelectedItem = roomDataGrid.Items[tempR.room_ID - 1];
+                    populateSelectionData();
+                }
+            }
+        }
+
+        private void checkOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(currentResv != null)
+            {
+                Room tempR = selRoom;
+                checkOutReservation(currentResv.rsvr_rID);
+                pollRestSrvr();
+                roomDataGrid.SelectedItem = roomDataGrid.Items[tempR.room_ID - 1];
+                populateSelectionData();
+            }
+        }
+
+        private void registerMntncBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selRoom != null)
+            {
+                Room tempR = selRoom;
+
+                RegisterServMaintWindow rsmw = new RegisterServMaintWindow(selRoom.room_ID, true);
+                rsmw.ShowDialog();
+                pollRestSrvr();
+                roomDataGrid.SelectedItem = roomDataGrid.Items[tempR.room_ID - 1];
+                populateMaintenance(tempR);
+            }
+        }
+
+        private void registerServiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selRoom != null)
+            {
+                Room tempR = selRoom;
+
+                RegisterServMaintWindow rsmw = new RegisterServMaintWindow(selRoom.room_ID, false);
+                rsmw.ShowDialog();
+                pollRestSrvr();
+                roomDataGrid.SelectedItem = roomDataGrid.Items[tempR.room_ID-1];
+                populateServices(selRoom);
+            }
+        }
+
+        ////////////
+        //HELPER FUNCTIONS
+        ////////////
         private void populateServices(Room room)
         {
+            clearServices();
             foreach (var item in serviceObjects)
             {
-                if(item.room_ID == room.room_ID)
+                if (item.room_ID == room.room_ID)
                 {
 
                     StackPanel service = new StackPanel();
@@ -155,16 +201,17 @@ namespace HotelDesktopApp.Controlls
                     serviceStack.Children.Add(service);
 
                 }
-                
+
             }
-           
+
         }
 
         private void populateMaintenance(Room room)
         {
+            clearMaintenance();
             foreach (var item in maintenanceObjects)
             {
-                if (item.mtr_ID == room.room_ID)
+                if (item.mtr_room == room.room_ID)
                 {
 
                     StackPanel maintenance = new StackPanel();
@@ -172,14 +219,15 @@ namespace HotelDesktopApp.Controlls
                     maintenance.HorizontalAlignment = HorizontalAlignment.Stretch;
                     maintenance.VerticalAlignment = VerticalAlignment.Stretch;
 
-                    Label lbl = new Label();
-                    lbl.Content = "ID: " + item.mtr_ID + " ";
+                    //Label lbl = new Label();
+                    //lbl.Content = "ID: " + item.mtr_ID + " ";
 
                     TextBlock txtBlock = new TextBlock();
-                    txtBlock.Text = item.mtr_Note;
                     txtBlock.TextWrapping = TextWrapping.Wrap;
+                    txtBlock.Text = item.mtr_Note + "\n" + "Status: " + item.mtr_status + '\n';
+                    
 
-                    maintenance.Children.Add(lbl);
+                    //maintenance.Children.Add(lbl);
                     maintenance.Children.Add(txtBlock);
 
                     maintenanceStack.Children.Add(maintenance);
@@ -187,16 +235,6 @@ namespace HotelDesktopApp.Controlls
                 }
 
             }
-        }
-
-        private void clearServices()
-        {
-            serviceStack.Children.Clear();
-        }
-
-        private void clearMaintenance()
-        {
-            maintenanceStack.Children.Clear();
         }
 
         private void populateSelectionData()
@@ -258,44 +296,128 @@ namespace HotelDesktopApp.Controlls
             }
         }
 
-        private void roomDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void populateSelectionData(Room room)
         {
-            populateSelectionData();
-        }
+            selRoom = room;
 
-        private void refreshBtn_Click(object sender, RoutedEventArgs e)
-        {
-            pollRestSrvr();
-        }
+            if (selRoom != null)
+            {
 
-        private void customerBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentCustomer != null)
-            {
-                CustomerInfoWindow ciw = new CustomerInfoWindow(currentCustomer);
-                ciw.Show();
-            }
-        }
+                currentCustomer = null;
+                currentResv = null;
+                clearServices();
+                clearMaintenance();
 
-        private void EditReservationBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if(currentResv != null)
-            {
-                ReservationEditorWindow rew = new ReservationEditorWindow(currentResv);
-                rew.ShowDialog();
-                pollRestSrvr();
-                populateSelectionData();
-            }
-            else
-            {
-                if (selRoom != null)
+                foreach (var item in reservationObjects)
                 {
-                    ReservationAdd rea = new ReservationAdd(selRoom);
-                    rea.ShowDialog();
-                    pollRestSrvr();
-                    populateSelectionData();
+                    if (item.rsvr_rID == selRoom.room_ID) { currentResv = item; }
+                }
+
+                if (currentResv != null)
+                {
+
+                    foreach (var item in customerObjects)
+                    {
+                        if (item.cstmr_ID == currentResv.cstmr_ID) { currentCustomer = item; }
+                    }
+
+                    reservedLbl.Content = "True";
+                    reservedLbl.Foreground = new SolidColorBrush(Colors.Green);
+
+                    isReserved.Header = "True";
+                    isReserved.Foreground = new SolidColorBrush(Colors.Green);
+
+                    resvDetailName.Content = "Name";
+                    resvDetailFrom.Content = currentResv.startDate.Substring(0, 10);
+                    resvDetailTo.Content = currentResv.endDate.Substring(0, 10);
+                    resvStatus.Header = currentResv.status;
+                    resvStatus.Foreground = new SolidColorBrush(Colors.Black);
+                    resvDetailName.Content = currentCustomer.name;
+
+                    populateServices(selRoom);
+                    populateMaintenance(selRoom);
+
+                }
+                else
+                {
+                    reservedLbl.Content = "False";
+                    reservedLbl.Foreground = new SolidColorBrush(Colors.Red);
+
+                    isReserved.Header = "False";
+                    isReserved.Foreground = new SolidColorBrush(Colors.Red);
+
+                    resvDetailName.Content = "";
+                    resvDetailFrom.Content = "";
+                    resvDetailTo.Content = "";
+                    resvStatus.Header = "";
+                    populateMaintenance(selRoom);
                 }
             }
+        }
+
+        private void pollRestSrvr()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            HttpResponseMessage response = client.GetAsync("listing/rooms").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomObjects = response.Content.ReadAsAsync<IEnumerable<Room>>().Result;
+                roomDataGrid.ItemsSource = roomObjects;
+            }
+
+            response = client.GetAsync("listing/reservations").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                reservationObjects = response.Content.ReadAsAsync<IEnumerable<Reservation>>().Result;
+            }
+
+            response = client.GetAsync("listing/customers").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                customerObjects = response.Content.ReadAsAsync<IEnumerable<Customer>>().Result;
+            }
+
+            response = client.GetAsync("listing/services").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                serviceObjects = response.Content.ReadAsAsync<IEnumerable<Service>>().Result;
+            }
+
+            response = client.GetAsync("listing/maintenance").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                maintenanceObjects = response.Content.ReadAsAsync<IEnumerable<Maintenance>>().Result;
+            }
+
+        }
+
+        private void checkOutReservation(int roomID)
+        {
+           
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            HttpResponseMessage response = client.DeleteAsync("delete/reservation/?id=" + roomID).Result;
+            pollRestSrvr();
+            populateSelectionData();
+
+        }
+
+        private void clearServices()
+        {
+            serviceStack.Children.Clear();
+        }
+
+        private void clearMaintenance()
+        {
+            maintenanceStack.Children.Clear();
         }
     }
 }

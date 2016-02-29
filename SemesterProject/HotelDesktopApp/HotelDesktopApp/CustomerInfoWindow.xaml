@@ -19,7 +19,7 @@
                 <Label Name="birthLbl"></Label>
             </StackPanel>
         </StackPanel>
-        <Label Name="nameLbl" Content="No Name" HorizontalContentAlignment="Center" TextBlock.Foreground="BlueViolet" TextBlock.FontFamily="Times New Roman" Width="90" Margin="148,94,20,0" Height="21" VerticalAlignment="Top"></Label>
+        <Label Name="nameLbl" Content="No Name" HorizontalContentAlignment="Center" TextBlock.Foreground="BlueViolet" TextBlock.FontFamily="Times New Roman" Margin="136,94,6,0" Height="21" VerticalAlignment="Top"/>
         <Label x:Name="cardLbl" HorizontalContentAlignment="Left" Content="123456789" TextBlock.FontWeight="Light" Foreground="Blue"  HorizontalAlignment="Left" Margin="34,142,0,0" VerticalAlignment="Top" Width="90" Height="25"/>
         <Button x:Name="editCustmrBtn" Content="Edit" HorizontalAlignment="Left" Margin="154,140,0,0" VerticalAlignment="Top" Width="75" Click="editCustmrBtn_Click"/>
         <Label x:Name="label" Content="Card:" HorizontalAlignment="Left" Margin="0,142,0,0" VerticalAlignment="Top"/>
