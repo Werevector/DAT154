@@ -1,0 +1,36 @@
+﻿<Window x:Class="HotelDesktopApp.ReservationAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelDesktopApp"
+        mc:Ignorable="d"
+        Title="Make Reservation" Height="295.785" Width="444.731">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="183"/>
+        <Button x:Name="okBtn" Content="Ok" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="75" Click="okBtn_Click"/>
+        <Grid HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="183">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="56*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="label" Content="ID:" HorizontalAlignment="Left" Margin="4,10,0,0" VerticalAlignment="Top" Height="26" Width="47" Grid.ColumnSpan="2"/>
+            <Label x:Name="idLabel" Content="no ID" Foreground="DarkGray" Grid.Column="1" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top"/>
+            <DatePicker Name="fromDate" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+            <DatePicker Name="toDate" Grid.Column="1" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label1_Copy" Content="From:" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Height="26" Width="51" Grid.ColumnSpan="2"/>
+            <Label x:Name="label1_Copy1" Content="To:" HorizontalAlignment="Left" Margin="4,65,0,0" VerticalAlignment="Top" Height="26" Width="51" Grid.ColumnSpan="2"/>
+            <Button x:Name="addCustomerBtn" Content="Add Customer" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2" Click="addCustomerBtn_Click"/>
+            <Button x:Name="refreshBtn" Content="Refresh" Grid.Column="1" HorizontalAlignment="Left" Margin="55,235,0,0" VerticalAlignment="Top" Width="75" Click="refreshBtn_Click"/>
+        </Grid>
+        <DataGrid x:Name="customerGrid" ColumnWidth="*" AlternatingRowBackground="LightBlue" 
+                  HorizontalAlignment="Left" Margin="183,0,0,0" CanUserAddRows="False" AutoGenerateColumns="False" VerticalAlignment="Top" Height="265" Width="254">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" TextBlock.FontStyle="Italic" Binding="{Binding cstmr_ID}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Card" Binding="{Binding cardNr}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

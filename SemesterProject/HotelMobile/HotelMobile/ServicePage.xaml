@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="HotelMobile.ServicePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HotelMobile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:HotelMobile.Models"
+    mc:Ignorable="d">
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.Content>
+                <Grid/>
+            </CommandBar.Content>
+            <AppBarButton Icon="Delete" Name="appBarDelete" Label="Delete" Click="appBarDelete_Click"/>
+            <AppBarButton Icon="Edit" Name="appBarEdit" Label="Send Edit" Click="appBarEdit_Click"/>
+            <AppBarButton Icon="GoToStart" Name="appBarHome" Label="Go Home" Click="appBarHome_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="161"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="listView" IsItemClickEnabled="True"
+                  Margin="10" 
+                  ItemsSource="{x:Bind serviceList}" ItemClick="listView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate  x:DataType="models:Service">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock FontSize="20" Text="{x:Bind room_ID}"></TextBlock>
+                        <TextBlock FontSize="15" Text="{x:Bind note}" Height="50"/>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
+            <TextBox Name="textBlock" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,0,0,57" Height="104" VerticalAlignment="Bottom"/>
+        </Grid>
+    </Grid>
+</Page>
