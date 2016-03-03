@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="HotelMobile.MaintainerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HotelMobile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:HotelMobile.Models"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="161"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="listView" IsItemClickEnabled="True"
+                  Margin="10" 
+                  ItemsSource="{x:Bind maintenanceList}" ItemClick="listView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate  x:DataType="models:Maintenance">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock FontSize="20" Text="{x:Bind mtr_room}"></TextBlock>
+                        <TextBlock FontSize="15" Text="{x:Bind mtr_Note}" Height="50"/>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
+            <TextBox Name="textBlock" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,0,0,57"/>
+            <ComboBox x:Name="statusBox" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="0,109,0,0" VerticalAlignment="Top" Width="164" Height="42">
+                <ComboBoxItem>NEW</ComboBoxItem>
+                <ComboBoxItem>INPROGRESS</ComboBoxItem>
+                <ComboBoxItem>FINISHED</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="editBtn" Content="Edit" HorizontalAlignment="Left" Margin="169,109,0,0" VerticalAlignment="Top" Height="42" Width="61" Click="editBtn_Click"/>
+            <Button x:Name="homeBtn" Content="Home" Background="Black" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="homeBtn_Click" Width="74" Height="37"/>
+        </Grid>
+    </Grid>
+</Page>

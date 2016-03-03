@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="HotelMobile.CleaningPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HotelMobile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:HotelMobile.Models"
+    mc:Ignorable="d">
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.Content>
+                <Grid/>
+            </CommandBar.Content>
+            <AppBarButton Icon="Accept" x:Name="cleanedButton" Label="Cleaned" Click="cleanedButton_Click"/>
+            <AppBarButton x:Name="homeButton" Icon="GoToStart" Label="Go Home" Click="homeButton_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView x:Name="listView" Height="471" Margin="10,90,0,0" VerticalAlignment="Top" IsItemClickEnabled="True" HorizontalAlignment="Left" Width="340" ItemClick="listView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Reservation">
+                    <StackPanel Orientation="Horizontal" Width="300">
+                        <TextBlock Text="Room: " Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="SemiBold" Text="{Binding rsvr_rID}" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="SemiBold" Text="{Binding status}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Rectangle Fill="#FFF4F4F5" Height="100" Margin="0,-10,0,0" Stroke="Black" VerticalAlignment="Top"/>
+        <TextBlock Margin="33,27,52,0" Text="Rooms to clean" VerticalAlignment="Top" 
+                   FontSize="25" FontWeight="Medium" FontStretch="UltraCondensed" Foreground="DarkBlue" 
+                   TextAlignment="Center" Height="58"/>
+
+    </Grid>
+</Page>
