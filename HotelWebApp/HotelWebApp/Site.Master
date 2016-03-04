@@ -55,7 +55,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Som white guys that care too much</p>
+                <p>&copy; <%: DateTime.Now.Year %> - HotellWebApp</p>
             </footer>
         </div>
     </form>
