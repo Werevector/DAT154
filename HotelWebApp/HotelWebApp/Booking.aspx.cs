@@ -4,16 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace HotelWebApp
-{
-    public class Room
-    {
-        //Room class that looks like the rest room class
-        public int room_ID { get; set; }
-        public int bedsNr { get; set; }
-        public string roomSize { get; set; }
-        public string pricing { get; set; }
-    }
-
+{ 
 
     public partial class Contact : Page
     {

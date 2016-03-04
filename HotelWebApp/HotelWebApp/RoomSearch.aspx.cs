@@ -8,15 +8,6 @@ using RestSharp;
 
 namespace HotelWebApp
 {
-    public class Reservation
-    {
-        public int rsvr_ID { get; set; }
-        public string startDate { get; set; }
-        public string endDate { get; set; }
-        public string status { get; set; }
-        public int cstmr_ID { get; set; }
-        public int rsvr_rID { get; set; }
-    }
 
     public partial class RoomSearch : System.Web.UI.Page
     {
